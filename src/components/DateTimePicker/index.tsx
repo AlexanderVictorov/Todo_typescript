@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Box } from '@mui/material';
@@ -7,25 +7,35 @@ import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
 import { leadTimeTodo } from '../../store/slices/todos';
 
-const DateTimePickers = ({ id }) => {
-  const [value, setValue] = useState(new Date('2022-04-27T00:00:00'));
+interface IPropsIP {
+  id:number
+}
+interface IRender {
+  InputProps:any,
+  inputRef:any,
+  inputProps:any,
+}
+const DateTimePickers: FC<IPropsIP> = ({ id }) => {
+  const [value, setValue] = useState<Date | null | string >(new Date('2022-04-27T00:00:00'));
   const [closeDatePicker, setCloseDatePicker] = useState(true);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!closeDatePicker) {
-      const newTime = Date.parse(value);
-      dispatch(leadTimeTodo({ id, newTime }));
+      if (typeof value === 'string') {
+        const newTime: number = Date.parse(value);
+        dispatch(leadTimeTodo({ id, newTime }));
+      }
     }
   }, [value]);
 
   const addTimeTodo = () => {
     setCloseDatePicker(false);
   };
-  const handleChange = (newValue) => {
+  const handleChange = (newValue:Date | null) => {
     setValue(newValue);
   };
+  // @ts-ignore
   const renderInput = ({ InputProps, inputRef, inputProps }) => (
     <Box
       sx={{
@@ -49,6 +59,7 @@ const DateTimePickers = ({ id }) => {
         value={value}
         onClose={addTimeTodo}
         onChange={handleChange}
+        // @ts-ignore
         renderInput={renderInput}
       />
     </LocalizationProvider>
