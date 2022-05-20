@@ -1,7 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthService } from '../../services/AuthService';
 
-const initialState = {
+interface IState {
+  isLogin: boolean;
+}
+
+interface IAction {
+  username: string,
+  email: string,
+  password: string
+}
+
+const initialState: IState = {
   isLogin: false,
 };
 
@@ -9,11 +19,11 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   await AuthService.logout();
 });
 
-export const RegistrationInServer = createAsyncThunk('auth/RegistrationInServer', async (action) => {
+export const RegistrationInServer = createAsyncThunk('auth/RegistrationInServer', async (action:IAction) => {
   await AuthService.registration(action);
 });
 
-export const LoginInServer = createAsyncThunk('auth/LoginInServer', async (action, { rejectWithValue }) => {
+export const LoginInServer = createAsyncThunk('auth/LoginInServer', async (action:IAction, { rejectWithValue }) => {
   try {
     const response = await AuthService.login(action);
     const { token } = response.data;

@@ -1,32 +1,38 @@
 import React, { Dispatch, FC, SetStateAction } from 'react';
 
 import {
-  Box, FormControl, InputLabel, MenuItem, Select,
+  Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent,
 } from '@mui/material';
+import { TStatus } from '../../types/types';
 
 interface IProps {
   filter: string,
-  setFilter: Dispatch<SetStateAction<string>>
+  setFilter: Dispatch<SetStateAction<TStatus>>
 }
 
-// const handleChangeFilter = (event: React.ChangeEvent<HTMLInputElement>) => setFilter(event.target.value);
+const SortTodo: FC<IProps> = ({ filter, setFilter }) => {
+  const handleChangeFilter = (event: SelectChangeEvent<string>, child: React.ReactNode) => {
+    setFilter(event.target.value as TStatus);
+  };
 
-const SortTodo: FC<IProps> = ({ filter, setFilter }) => (
-  <Box>
-    <FormControl size="small" fullWidth sx={{ minWidth: 80 }}>
-      <InputLabel id="demo-simple-select-label">Sort Todos</InputLabel>
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={filter}
-        label="Index"
-        onChange={(event) => setFilter(event.target.value as string)}
-      >
-        <MenuItem value="all">All todos</MenuItem>
-        <MenuItem value="done">Completed Todos</MenuItem>
-        <MenuItem value="active">Not Completed Todos</MenuItem>
-      </Select>
-    </FormControl>
-  </Box>
-);
+  return (
+    <Box>
+      <FormControl size="small" fullWidth sx={{ minWidth: 80 }}>
+        <InputLabel id="demo-simple-select-label">Sort Todos</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={filter}
+          label="Index"
+          onChange={handleChangeFilter}
+        >
+          <MenuItem value="all">All todos</MenuItem>
+          <MenuItem value="done">Completed Todos</MenuItem>
+          <MenuItem value="active">Not Completed Todos</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+  );
+};
+
 export default SortTodo;

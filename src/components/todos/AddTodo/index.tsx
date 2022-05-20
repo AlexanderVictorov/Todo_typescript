@@ -46,10 +46,9 @@ const styles = {
 };
 
 interface IProps {
-  // TODO
-  addTodoInList: any;
-  setFilter: Dispatch<SetStateAction<string>>;
-  filter: TStatus
+  addTodoInList: (name:string) => void;
+  setFilter: Dispatch<SetStateAction<TStatus>>;
+  filter: TStatus;
 }
 
 const AddTodo: FC<IProps> = ({

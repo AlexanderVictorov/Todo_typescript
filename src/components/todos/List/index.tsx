@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Grid } from '@mui/material';
 
 import { useSnackbar } from 'notistack';
-import Index from '../Todo';
+import Todo, { ITodo } from '../Todo';
 import { changeStatus } from '../../../store/slices/todos';
 
-const List = ({
+interface IProps {
+  list: ITodo[],
+  updateTodo: (id: number, text: string) => void,
+  InWastebasket: boolean
+}
+
+const List: FC<IProps> = ({
   list, updateTodo, InWastebasket,
 }) => {
-  const [todoList, setTodoList] = useState(list);
-  const [currentTodo, setCurrentTodo] = useState(null);
+  const [todoList, setTodoList] = useState<ITodo[]>([]);
+  const [currentTodo, setCurrentTodo] = useState({});
 
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
@@ -25,29 +31,30 @@ const List = ({
       variant: 'info',
     });
   };
-  const dragStartHandler = (e, todo) => {
-    e.target.style.opacity = '0.5';
+  const dragStartHandler = (e: React.DragEvent<HTMLDivElement>, todo: ITodo) => {
+    e.currentTarget.style.opacity = '0.5';
     setCurrentTodo(todo);
   };
-  const dragLeaveHandler = (e) => {
-    e.target.style.opacity = '1';
+  const dragLeaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
+    e.currentTarget.style.opacity = '1';
   };
-  const dragEndHandler = (e, todo) => {
+  const dragEndHandler = (e: React.DragEvent<HTMLDivElement>, todo: ITodo) => {
     const { id } = todo;
     if (InWastebasket) {
       const statusTodoTrash = 'trash';
       dispatch(changeStatus({ id, statusTodoTrash }));
       handleMoveToTrash();
     }
-    e.target.style.opacity = '1';
+    e.currentTarget.style.opacity = '1';
   };
-  const dragOvertHandler = (e) => {
+  const dragOvertHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    e.target.style.opacity = '0.5';
+    e.currentTarget.style.opacity = '0.5';
   };
-  const dropHandler = (e, todo) => {
+  const dropHandler = (e: React.DragEvent<HTMLDivElement>, todo: ITodo) => {
     e.preventDefault();
-    setTodoList((prev) => prev.map((item) => {
+    setTodoList((prev: any[]) => prev.map((item) => {
+      // @ts-ignore
       if (item.id === currentTodo.id) {
         return todo;
       }
@@ -56,27 +63,22 @@ const List = ({
       }
       return item;
     }));
-    e.target.style.opacity = '1';
+    e.currentTarget.style.opacity = '1';
   };
 
   return (
     <Grid container>
       {todoList.map((todo, index) => (
-        <Index
+        <Todo
           onDragStart={dragStartHandler}
           onDragLeave={dragLeaveHandler}
           onDragEnd={dragEndHandler}
           onDragOver={dragOvertHandler}
           onDrop={dropHandler}
-          validity={todo.validity}
-          overdue={todo.overdue}
           index={index + 1}
-          id={todo.id}
-          name={todo.name}
           updateTodo={updateTodo}
           key={todo.id}
           todo={todo}
-          status={todo.status}
         />
       ))}
     </Grid>

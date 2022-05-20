@@ -1,1 +1,1 @@
-export type TStatus = 'active' | 'done' | 'trash'
+export type TStatus = 'active' | 'done' | 'trash' | 'all'

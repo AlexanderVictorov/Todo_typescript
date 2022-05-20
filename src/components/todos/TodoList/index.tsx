@@ -1,32 +1,18 @@
-import React, {
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  Box,
-  Grid,
-  Paper,
-} from '@mui/material';
+import { Box, Grid, Paper } from '@mui/material';
 
 import AddTodo from '../AddTodo';
-import List from '../List/List';
+import List from '../List';
 import ShowPagination from '../../Pagination';
-import {
-  addTodo,
-  changeTodos,
-  fetchTodos,
-} from '../../../store/slices/todos';
+import { addTodo, changeTodos, fetchTodos } from '../../../store/slices/todos';
 import emptyTrash from '../../../images/emtyTrash.png';
 import fullTrash from '../../../images/fullTrash.png';
 
 import ROUTE_LINKS from '../../MyRouters/routeLink';
+import { useAppDispatch, useAppSelector } from '../../../types/hooks/hooks';
+import { TStatus } from '../../../types/types';
 
 const styles = {
   Paper: {
@@ -47,14 +33,14 @@ const styles = {
 
 const TodoList = () => {
   const [trashCondition, setTrashCondition] = useState(false);
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState<TStatus>('all');
   const [InWastebasket, setInWastebasket] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [todoPerPage] = useState(4);
 
-  const todoArray = useSelector((state) => state.todos.todos || []);
+  const todoArray = useAppSelector<any[]>((state) => state.todos.todos || []);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const filterTodo = useMemo(() => {
@@ -66,7 +52,7 @@ const TodoList = () => {
       case 'active':
         return todoArray.filter((todo) => todo.status === 'active');
       default:
-        return null;
+        return [];
     }
   }, [filter, todoArray]);
 
@@ -84,21 +70,21 @@ const TodoList = () => {
     dispatch(fetchTodos());
   }, []);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const addTodoInList = (todo) => {
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const addTodoInList = (name: string) => {
     dispatch(addTodo({
       id: Date.now(),
-      name: todo,
+      name,
       status: 'active',
       validity: Infinity,
       overdue: false,
     }));
   };
   const navigatingToTheWastebasket = () => navigate(ROUTE_LINKS.trash);
-  const updateTodo = (id, newText) => {
+  const updateTodo = (id: number, newText: string) => {
     dispatch(changeTodos({ id, newText }));
   };
-  const onDragOver = (e) => {
+  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
   const onDrop = () => {

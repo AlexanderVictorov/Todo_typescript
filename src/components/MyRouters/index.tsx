@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { AuthContext } from '../../context/context';
 
 import Layout from '../Layout';
-import NoMatch from '../../pages/NoMatch/NoMatch';
+import NoMatch from '../../pages/NoMatch';
 import Login from '../../pages/Login';
 import Registration from '../../pages/Registration';
 import TodoList from '../todos/TodoList';
