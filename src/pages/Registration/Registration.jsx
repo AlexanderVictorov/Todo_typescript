@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 
 import { useSnackbar } from 'notistack';
-import Animation from '../../components/Animation/Animation';
+import Animation from '../../components/Animation';
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
 import { RegistrationInServer } from '../../store/slices/auth';
 import useValidateForm from '../../components/hooks/validateForm';

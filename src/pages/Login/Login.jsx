@@ -12,7 +12,7 @@ import { useSnackbar } from 'notistack';
 import { LoginInServer } from '../../store/slices/auth';
 import { AuthContext } from '../../context/Context';
 
-import Animation from '../../components/Animation/Animation';
+import Animation from '../../components/Animation';
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
 import useValidateForm from '../../components/hooks/validateForm';
 
