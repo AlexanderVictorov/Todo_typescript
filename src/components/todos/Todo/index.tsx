@@ -187,7 +187,7 @@ const Todo: FC<IProps> = ({
         {isEditing ? (
           <TextField
             id="standard-basic"
-            label="Todo"
+            label="Index"
             variant="standard"
             multiline
             onKeyDown={changeInput}

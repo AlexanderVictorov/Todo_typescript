@@ -19,7 +19,7 @@ const SortTodo = ({ filter, setFilter }) => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={filter}
-          label="Todo"
+          label="Index"
           onChange={handleChangeFilter}
         >
           <MenuItem value="all">All todos</MenuItem>

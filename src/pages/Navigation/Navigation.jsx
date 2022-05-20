@@ -6,7 +6,7 @@ import { Typography } from '@mui/material';
 
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
 import { logout, userIsAuthorized } from '../../store/slices/auth';
-import { AuthContext } from '../../context/Context';
+import { AuthContext } from '../../context/context';
 
 const styles = {
   nav: {

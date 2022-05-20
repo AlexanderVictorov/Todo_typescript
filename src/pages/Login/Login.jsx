@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { LoginInServer } from '../../store/slices/auth';
-import { AuthContext } from '../../context/Context';
+import { AuthContext } from '../../context/context';
 
 import Animation from '../../components/Animation';
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';

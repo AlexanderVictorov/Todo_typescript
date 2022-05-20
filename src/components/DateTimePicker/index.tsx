@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Box } from '@mui/material';
+import { Box, TextFieldProps } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
@@ -10,22 +10,18 @@ import { leadTimeTodo } from '../../store/slices/todos';
 interface IPropsIP {
   id:number
 }
-interface IRender {
-  InputProps:any,
-  inputRef:any,
-  inputProps:any,
-}
+
 const DateTimePickers: FC<IPropsIP> = ({ id }) => {
-  const [value, setValue] = useState<Date | null | string >(new Date('2022-04-27T00:00:00'));
+  const [value, setValue] = useState<Date | null>(new Date('2022-04-27T00:00:00'));
   const [closeDatePicker, setCloseDatePicker] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!closeDatePicker) {
-      if (typeof value === 'string') {
-        const newTime: number = Date.parse(value);
-        dispatch(leadTimeTodo({ id, newTime }));
-      }
+      if (!value) return;
+      const newTime: number = Date.parse(value.toString());
+      console.log(newTime);
+      dispatch(leadTimeTodo({ id, newTime }));
     }
   }, [value]);
 
@@ -35,8 +31,9 @@ const DateTimePickers: FC<IPropsIP> = ({ id }) => {
   const handleChange = (newValue:Date | null) => {
     setValue(newValue);
   };
-  // @ts-ignore
-  const renderInput = ({ InputProps, inputRef, inputProps }) => (
+
+  const renderInput = ({ InputProps, inputRef, inputProps }: TextFieldProps) => (
+    // @ts-ignore
     <Box
       sx={{
         '& .MuiInputAdornment-root .MuiButtonBase-root': {
@@ -59,7 +56,6 @@ const DateTimePickers: FC<IPropsIP> = ({ id }) => {
         value={value}
         onClose={addTimeTodo}
         onChange={handleChange}
-        // @ts-ignore
         renderInput={renderInput}
       />
     </LocalizationProvider>

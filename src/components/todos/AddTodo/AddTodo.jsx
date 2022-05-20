@@ -80,7 +80,7 @@ const AddTodo = ({
     >
       <Box sx={styles.TodoPanel}>
         <Input
-          placeholder="Todo"
+          placeholder="Index"
           inputProps={{
             'aria-label': 'Description',
           }}

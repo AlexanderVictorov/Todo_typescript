@@ -2,9 +2,9 @@ import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './App.css';
 
-import MyRoutes from './components/MyRouters/MyRoutes';
+import MyRoutes from './components/MyRouters';
 import Loader from './components/Loader';
-import { AuthContext } from './context/Context';
+import { AuthContext } from './context/context';
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(JSON.parse(localStorage.getItem('isAuth')));

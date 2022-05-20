@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import {
+  ChangeEvent, FocusEvent, useEffect, useState,
+} from 'react';
 
 const useValidateForm = () => {
   const [userDetails, setUserDetails] = useState({ username: '', email: '', password: '' });
@@ -22,7 +24,7 @@ const useValidateForm = () => {
     }
   }, [validateError]);
 
-  const blurHandler = (e) => {
+  const blurHandler = (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     switch (e.target.name) {
       case 'username':
         setUserNameDirty(true);
@@ -34,10 +36,10 @@ const useValidateForm = () => {
         setPasswordDirty(true);
         break;
       default:
-        console.log('blurHandler/default');
+        return null;
     }
   };
-  const userNameHandler = (e) => {
+  const userNameHandler = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setUserDetails({
       ...userDetails,
       [e.target.name]: e.target.value,
@@ -48,7 +50,7 @@ const useValidateForm = () => {
       setValidateError({ ...validateError, userNameError: '' });
     }
   };
-  const emailHandler = (e) => {
+  const emailHandler = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setUserDetails({
       ...userDetails,
       [e.target.name]: e.target.value,
@@ -61,7 +63,7 @@ const useValidateForm = () => {
       setValidateError({ ...validateError, emailError: '' });
     }
   };
-  const passwordHandler = (e) => {
+  const passwordHandler = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setUserDetails({
       ...userDetails,
       [e.target.name]: e.target.value,

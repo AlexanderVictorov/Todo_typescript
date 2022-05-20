@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Grid } from '@mui/material';
 
 import { useSnackbar } from 'notistack';
-import Todo from '../Todo/Todo';
+import Index from '../Todo';
 import { changeStatus } from '../../../store/slices/todos';
 
 const List = ({
@@ -62,7 +62,7 @@ const List = ({
   return (
     <Grid container>
       {todoList.map((todo, index) => (
-        <Todo
+        <Index
           onDragStart={dragStartHandler}
           onDragLeave={dragLeaveHandler}
           onDragEnd={dragEndHandler}
