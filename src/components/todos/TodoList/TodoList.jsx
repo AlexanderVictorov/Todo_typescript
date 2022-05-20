@@ -15,9 +15,9 @@ import {
   Paper,
 } from '@mui/material';
 
-import AddTodo from '../AddTodo/AddTodo';
+import AddTodo from '../AddTodo';
 import List from '../List/List';
-import ShowPagination from '../../Pagination/ShowPagination';
+import ShowPagination from '../../Pagination';
 import {
   addTodo,
   changeTodos,

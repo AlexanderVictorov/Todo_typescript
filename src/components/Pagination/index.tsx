@@ -1,7 +1,13 @@
-import React, { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import { Pagination } from '@mui/material';
 
-const ShowPagination = ({ todoPerPage, total, paginate }) => {
+interface IProps {
+  todoPerPage: number,
+  total: number,
+  paginate: (page:number) => void
+}
+
+const ShowPagination: FC<IProps> = ({ todoPerPage, total, paginate }) => {
   const pageNumber = useMemo(() => Math.ceil(total / todoPerPage), [total, todoPerPage]);
 
   return (

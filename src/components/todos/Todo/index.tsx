@@ -14,6 +14,8 @@ import { changeStatus, overdueTask, validForExecution } from '../../../store/sli
 import backgroundTimer from '../../../images/time.png';
 import DateTimePickers from '../../DateTimePicker';
 
+import { TStatus } from '../../../types/types';
+
 const styles = {
   Card: {
     textDecoration: 'none',
@@ -64,8 +66,6 @@ const styles = {
     justifyContent: 'center',
   },
 };
-
-type TStatus = 'active' | 'done' | 'trash'
 
 interface ITodo {
   id: number,

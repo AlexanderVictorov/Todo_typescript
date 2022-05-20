@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, {
+  Dispatch, FC, SetStateAction, useState,
+} from 'react';
 import { useDispatch } from 'react-redux';
 
 import {
-  Box,
-  Button,
-  Input,
-  Typography,
+  Box, Button, Input, Typography,
 } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { saveTodoOnServer } from '../../../store/slices/todos';
 
 import SortTodo from '../../SortTodo';
+
+import { TStatus } from '../../../types/types';
 
 const styles = {
   SortDropDown: {
@@ -44,7 +45,14 @@ const styles = {
   },
 };
 
-const AddTodo = ({
+interface IProps {
+  // TODO
+  addTodoInList: any;
+  setFilter: Dispatch<SetStateAction<string>>;
+  filter: TStatus
+}
+
+const AddTodo: FC<IProps> = ({
   addTodoInList, setFilter, filter,
 }) => {
   const [newTodo, setNewTodo] = useState('');
@@ -53,7 +61,7 @@ const AddTodo = ({
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (newTodo === '') {
       setIsError(true);
@@ -63,7 +71,7 @@ const AddTodo = ({
     addTodoInList(newTodo);
     setNewTodo('');
   };
-  const onChangeInput = (event) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewTodo(event.target.value);
   };
   const saveTodosInServer = () => {
