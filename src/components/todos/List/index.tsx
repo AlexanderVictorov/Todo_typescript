@@ -4,8 +4,11 @@ import { useDispatch } from 'react-redux';
 import { Grid } from '@mui/material';
 
 import { useSnackbar } from 'notistack';
-import Todo, { ITodo } from '../Todo';
 import { changeStatus } from '../../../store/slices/todos';
+
+import { ITodo } from '../../../types/types';
+
+import Todo from '../Todo';
 
 interface IProps {
   list: ITodo[],

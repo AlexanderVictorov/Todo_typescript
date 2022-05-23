@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { BASE_URL, AXIOS_URL } from '../config';
+import {
+  AXIOS_URL,
+  BASE_URL,
+} from '../config';
 
 const $api = axios.create({
   withCredentials: true,

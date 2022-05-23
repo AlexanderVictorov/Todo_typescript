@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import {
-  Box,
-  Button,
-  Paper,
-  Typography,
+  Box, Button, Paper, Typography,
 } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -14,6 +11,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Loader from '../../components/Loader';
 import { fetchTodos } from '../../store/slices/todos';
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
+import { useAppSelector } from '../../types/hooks/hooks';
+import { ITodo } from '../../types/types';
 
 const styles = {
   Paper: {
@@ -23,7 +22,8 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     marginTop: '10px',
-    width: '500px',
+    width: '100%',
+    maxWidth: '500px',
     textDecoration: 'none',
     zIndex: 1,
   },
@@ -33,11 +33,12 @@ const styles = {
 };
 
 const TodoInfo = () => {
-  const [todoInfo, setTodoInfo] = useState(null);
-  const [curIndex, setCurIndex] = useState(null);
+  // @ts-ignore
+  const [todoInfo, setTodoInfo] = useState<ITodo>([]);
+  const [curIndex, setCurIndex] = useState<number>(0);
 
-  const loading = useSelector((state) => state.todos.loading);
-  const todoArray = useSelector((state) => state.todos.todos);
+  const loading = useAppSelector((state) => state.todos.loading || []);
+  const todoArray = useAppSelector((state) => state.todos.todos || []);
 
   const params = useParams();
 
@@ -50,8 +51,10 @@ const TodoInfo = () => {
   }, [todoArray, loading]);
   useEffect(() => {
     if (!todoArray) return;
-    const todoByIndex = todoArray.find((todo, inx) => {
-      if (todo.id === +params.id) {
+    const todoByIndex = todoArray.find((todo, inx: number) => {
+      const { id } = params;
+      const { id: id1 } = todo;
+      if (id1 === id) {
         setCurIndex(inx);
         return true;
       }
@@ -63,16 +66,20 @@ const TodoInfo = () => {
 
   const onNextTodo = () => {
     if (todoArray[curIndex + 1]) {
-      navigate(`${ROUTE_LINKS.todo}/${todoArray[curIndex + 1].id}`);
+      const { id } = todoArray[curIndex + 1];
+      navigate(`${ROUTE_LINKS.todo}/${id}`);
     } else {
-      navigate(`${ROUTE_LINKS.todo}/${todoArray[0].id}`);
+      const { id } = todoArray[0];
+      navigate(`${ROUTE_LINKS.todo}/${id}`);
     }
   };
   const onPreviousTodo = () => {
     if (todoArray[curIndex - 1]) {
-      navigate(`${ROUTE_LINKS.todo}/${todoArray[curIndex - 1].id}`);
+      const { id } = todoArray[curIndex - 1];
+      navigate(`${ROUTE_LINKS.todo}/${id}`);
     } else {
-      navigate(`${ROUTE_LINKS.todo}/${todoArray[todoArray.length - 1].id}`);
+      const { id } = todoArray[todoArray.length - 1];
+      navigate(`${ROUTE_LINKS.todo}/${id}`);
     }
   };
   const backTodos = () => {
@@ -82,7 +89,7 @@ const TodoInfo = () => {
   if (!todoInfo) return <Loader />;
 
   return (
-    <Box>
+    <Box sx={{ padding: '15px' }}>
       <Paper
         elevation={2}
         sx={styles.Paper}

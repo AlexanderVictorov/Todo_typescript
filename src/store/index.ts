@@ -1,4 +1,8 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import {
+  AnyAction,
+  combineReducers,
+  configureStore,
+} from '@reduxjs/toolkit';
 import todoSlice from './slices/todos';
 import authSlice from './slices/auth';
 
@@ -7,7 +11,8 @@ const appReducer = combineReducers({
   todos: todoSlice,
 });
 
-const rootReducer = (state, action) => {
+// @ts-ignore
+const rootReducer = (state, action: AnyAction) => {
   if (action.type === 'auth/logout/pending') {
     return appReducer(undefined, action);
   }
@@ -22,5 +27,5 @@ export const store = configureStore({
   }),
 });
 
-// export type RootState = ReturnType<typeof store.getState>
-// export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

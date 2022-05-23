@@ -1,11 +1,18 @@
 import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  useNavigate,
+} from 'react-router-dom';
 
 import { Typography } from '@mui/material';
 
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
-import { logout, userIsAuthorized } from '../../store/slices/auth';
+import {
+  logout,
+  userIsAuthorized,
+} from '../../store/slices/auth';
 import { AuthContext } from '../../context/context';
 
 const styles = {

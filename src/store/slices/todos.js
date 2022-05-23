@@ -1,4 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSlice,
+} from '@reduxjs/toolkit';
 import { TodoService } from '../../services/TodoService';
 
 const initialState = {

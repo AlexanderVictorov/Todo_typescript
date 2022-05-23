@@ -14,7 +14,7 @@ import { changeStatus, overdueTask, validForExecution } from '../../../store/sli
 import backgroundTimer from '../../../images/time.png';
 import DateTimePickers from '../../DateTimePicker';
 
-import { TStatus } from '../../../types/types';
+import { ITodo } from '../../../types/types';
 
 const styles = {
   Card: {
@@ -66,14 +66,6 @@ const styles = {
     justifyContent: 'center',
   },
 };
-
-export interface ITodo {
-  id: number,
-  name: string,
-  status: TStatus,
-  validity: number,
-  overdue: boolean
-}
 
 interface IProps {
   updateTodo: (id: number, text: string) => void,
