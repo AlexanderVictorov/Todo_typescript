@@ -26,6 +26,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../types/hooks/hooks';
+import { ITodo } from '../../types/types';
 
 const styles = {
   Paper: {
@@ -42,9 +43,9 @@ const styles = {
 };
 
 const Trashcan = () => {
-  const [trashTodo, setTrashTodo] = useState(null);
+  const [trashTodo, setTrashTodo] = useState<ITodo[]>([]);
 
-  const todoArray = useAppSelector((state) => state.todos.todos);
+  const todoArray = useAppSelector((state) => state.todos.todos || []);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ const Trashcan = () => {
   }, [todoArray]);
   useEffect(() => {
     if (!todoArray) return;
-    const todoByStatus = todoArray.filter((todos) => todos.status === 'trash');
+    const todoByStatus = todoArray.filter((todos:ITodo) => todos.status === 'trash');
     if (todoByStatus.length === 0) {
       navigate(ROUTE_LINKS.todo);
     }
@@ -75,13 +76,13 @@ const Trashcan = () => {
       variant: 'info',
     });
   };
-  const restoreTodo = (id) => {
+  const restoreTodo = (id:number) => {
     const statusTodoActive = 'active';
     dispatch(changeStatus({ id, statusTodoActive }));
     handleClickRestoreTodo();
     dispatch(saveTodoOnServer());
   };
-  const removeTodo = (id) => {
+  const removeTodo = (id: number) => {
     dispatch(deleteTodo(id));
     handleClickRemoveTodo();
     dispatch(saveTodoOnServer());

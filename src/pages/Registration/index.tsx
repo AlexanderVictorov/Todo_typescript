@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
@@ -36,7 +36,7 @@ const Registration = () => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  const addUser = async (event) => {
+  const addUser = async (event: FormEvent<HTMLDivElement>) => {
     event.preventDefault();
     await dispatch(RegistrationInServer(validate.userDetails));
     validate.setUserDetails({ username: '', email: '', password: '' });
@@ -56,8 +56,8 @@ const Registration = () => {
             sx={{
               '& > :not(style)': { m: 1, width: '26ch', display: 'flex' },
             }}
-            noValidate
-            autoComplete="off"
+            // noValidate
+            // autoComplete="off"
           >
             {(validate.userNameDirty && validate.validateError.userNameError) && (
               <Typography
