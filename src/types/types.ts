@@ -7,3 +7,9 @@ export interface ITodo {
   validity: number,
   overdue: boolean
 }
+
+export interface IAction {
+  username: string,
+  email: string,
+  password: string
+}

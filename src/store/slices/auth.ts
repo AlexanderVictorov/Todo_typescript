@@ -1,14 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthService } from '../../services/AuthService';
+import { IAction } from '../../types/types';
 
 interface IState {
   isLogin: boolean;
-}
-
-interface IAction {
-  username: string,
-  email: string,
-  password: string
 }
 
 const initialState: IState = {

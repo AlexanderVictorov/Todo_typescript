@@ -1,8 +1,8 @@
-import { createContext } from 'react';
+import { createContext, Dispatch, SetStateAction } from 'react';
 
 export type TGlobalContext = {
   isAuth: boolean,
-  setIsAuth: (a: boolean) => void
+  setIsAuth: Dispatch<SetStateAction<boolean>>
 }
 
 export const AuthContext = createContext<TGlobalContext>({
