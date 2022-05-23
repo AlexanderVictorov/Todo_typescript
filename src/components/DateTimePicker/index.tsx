@@ -1,11 +1,11 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { Box, TextFieldProps } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
 import { leadTimeTodo } from '../../store/slices/todos';
+import { useAppDispatch } from '../../types/hooks/hooks';
 
 interface IPropsIP {
   id:number
@@ -14,7 +14,7 @@ interface IPropsIP {
 const DateTimePickers: FC<IPropsIP> = ({ id }) => {
   const [value, setValue] = useState<Date | null>(new Date('2022-04-27T00:00:00'));
   const [closeDatePicker, setCloseDatePicker] = useState(true);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!closeDatePicker) {

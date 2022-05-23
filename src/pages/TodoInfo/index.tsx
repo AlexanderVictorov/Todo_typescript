@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 import {
   Box, Button, Paper, Typography,
@@ -11,7 +10,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Loader from '../../components/Loader';
 import { fetchTodos } from '../../store/slices/todos';
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
-import { useAppSelector } from '../../types/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../types/hooks/hooks';
 import { ITodo } from '../../types/types';
 
 const styles = {
@@ -43,7 +42,7 @@ const TodoInfo = () => {
   const params = useParams();
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (todoArray) return;

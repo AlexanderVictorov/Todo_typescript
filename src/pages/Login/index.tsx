@@ -1,16 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, FormEvent } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+
 import {
-  NavLink,
-  useNavigate,
-} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import {
-  Box,
-  Button,
-  Stack,
-  TextField,
-  Typography,
+  Box, Button, Stack, TextField, Typography,
 } from '@mui/material';
+
 import { useSnackbar } from 'notistack';
 import { LoginInServer } from '../../store/slices/auth';
 import { AuthContext } from '../../context/context';
@@ -18,6 +12,7 @@ import { AuthContext } from '../../context/context';
 import Animation from '../../components/Animation';
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
 import useValidateForm from '../../components/hooks/validateForm';
+import { useAppDispatch } from '../../types/hooks/hooks';
 
 const styles = {
   Login: {
@@ -38,7 +33,7 @@ const Login = () => {
   const { setIsAuth } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
   const validate = useValidateForm();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const userNotification = () => {
@@ -46,7 +41,7 @@ const Login = () => {
       variant: 'error',
     });
   };
-  const LoginFormHandler = async (e) => {
+  const LoginFormHandler = async (e: FormEvent<HTMLDivElement>) => {
     e.preventDefault();
     await dispatch(LoginInServer(validate.userDetails));
     if (localStorage.getItem('isAuth')) {
@@ -67,11 +62,12 @@ const Login = () => {
           onSubmit={LoginFormHandler}
         >
           <Box
+            // todo
+            // noValidate
+            // autoComplete="off"
             sx={{
               '& > :not(style)': { m: 1, width: '26ch', display: 'flex' },
             }}
-            noValidate
-            autoComplete="off"
           >
             {(validate.userNameDirty && validate.validateError.userNameError) && (
               <Typography sx={{ fontSize: '12px' }} color="error">

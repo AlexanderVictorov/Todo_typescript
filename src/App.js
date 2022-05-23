@@ -2,16 +2,16 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { useSelector } from 'react-redux';
 import './App.css';
 
 import MyRoutes from './components/MyRouters';
 import Loader from './components/Loader';
 import { AuthContext } from './context/context';
+import { useAppSelector } from './types/hooks/hooks';
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(JSON.parse(localStorage.getItem('isAuth')));
-  const loading = useSelector((state) => state.todos.loading);
+  const loading = useAppSelector((state) => state.todos.loading);
   const providerValue = useMemo(() => ({ isAuth, setIsAuth }), [isAuth, setIsAuth]);
 
   return (

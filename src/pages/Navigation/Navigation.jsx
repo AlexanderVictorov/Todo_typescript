@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   Link,
   NavLink,
@@ -14,6 +13,7 @@ import {
   userIsAuthorized,
 } from '../../store/slices/auth';
 import { AuthContext } from '../../context/context';
+import { useAppDispatch } from '../../types/hooks/hooks';
 
 const styles = {
   nav: {
@@ -28,7 +28,7 @@ const styles = {
 const Navigation = () => {
   const { isAuth, setIsAuth } = useContext(AuthContext);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const isActiveStyle = ({ isActive }) => ({
     fontWeight: isActive ? 'bold' : 'normal',

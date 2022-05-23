@@ -2,10 +2,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux';
+
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -25,6 +22,10 @@ import {
 } from '../../store/slices/todos';
 import Loader from '../../components/Loader';
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../types/hooks/hooks';
 
 const styles = {
   Paper: {
@@ -43,9 +44,9 @@ const styles = {
 const Trashcan = () => {
   const [trashTodo, setTrashTodo] = useState(null);
 
-  const todoArray = useSelector((state) => state.todos.todos);
+  const todoArray = useAppSelector((state) => state.todos.todos);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();

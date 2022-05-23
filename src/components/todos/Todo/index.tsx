@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -15,6 +14,7 @@ import backgroundTimer from '../../../images/time.png';
 import DateTimePickers from '../../DateTimePicker';
 
 import { ITodo } from '../../../types/types';
+import { useAppDispatch } from '../../../types/hooks/hooks';
 
 const styles = {
   Card: {
@@ -90,7 +90,7 @@ const Todo: FC<IProps> = ({
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleClickTimeOff = () => {

@@ -9,6 +9,7 @@ import { changeStatus } from '../../../store/slices/todos';
 import { ITodo } from '../../../types/types';
 
 import Todo from '../Todo';
+import { useAppDispatch } from '../../../types/hooks/hooks';
 
 interface IProps {
   list: ITodo[],
@@ -23,7 +24,7 @@ const List: FC<IProps> = ({
   const [currentTodo, setCurrentTodo] = useState({});
 
   const { enqueueSnackbar } = useSnackbar();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setTodoList(list);

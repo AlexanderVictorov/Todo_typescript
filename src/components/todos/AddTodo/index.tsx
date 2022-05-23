@@ -1,7 +1,6 @@
 import React, {
   Dispatch, FC, SetStateAction, useState,
 } from 'react';
-import { useDispatch } from 'react-redux';
 
 import {
   Box, Button, Input, Typography,
@@ -12,6 +11,7 @@ import { saveTodoOnServer } from '../../../store/slices/todos';
 import SortTodo from '../../SortTodo';
 
 import { TStatus } from '../../../types/types';
+import { useAppDispatch } from '../../../types/hooks/hooks';
 
 const styles = {
   SortDropDown: {
@@ -46,7 +46,7 @@ const styles = {
 };
 
 interface IProps {
-  addTodoInList: (name:string) => void;
+  addTodoInList: (name: string) => void;
   setFilter: Dispatch<SetStateAction<TStatus>>;
   filter: TStatus;
 }
@@ -57,7 +57,7 @@ const AddTodo: FC<IProps> = ({
   const [newTodo, setNewTodo] = useState('');
   const [isError, setIsError] = useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {

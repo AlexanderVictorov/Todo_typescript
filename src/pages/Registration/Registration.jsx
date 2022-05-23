@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 import { styled } from '@mui/material/styles';
 import {
@@ -16,6 +15,7 @@ import Animation from '../../components/Animation';
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
 import { RegistrationInServer } from '../../store/slices/auth';
 import useValidateForm from '../../components/hooks/validateForm';
+import { useAppDispatch } from '../../types/hooks/hooks';
 
 const StyledBox = styled(Box)`
   display: flex;
@@ -33,7 +33,7 @@ const StyledBox = styled(Box)`
 
 const Registration = () => {
   const validate = useValidateForm();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
   const addUser = async (event) => {
