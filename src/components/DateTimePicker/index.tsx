@@ -20,7 +20,6 @@ const DateTimePickers: FC<IPropsIP> = ({ id }) => {
     if (!closeDatePicker) {
       if (!value) return;
       const newTime: number = Date.parse(value.toString());
-      console.log(newTime);
       dispatch(leadTimeTodo({ id, newTime }));
     }
   }, [value]);

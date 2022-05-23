@@ -12,7 +12,7 @@ const ShowPagination: FC<IProps> = ({ todoPerPage, total, paginate }) => {
 
   return (
     <Pagination
-      sx={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}
+      sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
       color="primary"
       count={pageNumber}
       onChange={(event, page) => paginate(page)}
