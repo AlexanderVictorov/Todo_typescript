@@ -32,6 +32,7 @@ const styles = {
 };
 
 const TodoInfo = () => {
+  // todo
   // @ts-ignore
   const [todoInfo, setTodoInfo] = useState<ITodo>([]);
   const [curIndex, setCurIndex] = useState<number>(0);
@@ -50,10 +51,11 @@ const TodoInfo = () => {
   }, [todoArray, loading]);
   useEffect(() => {
     if (!todoArray) return;
-    const todoByIndex = todoArray.find((todo, inx: number) => {
+    const todoByIndex = todoArray.find((todo, inx) => {
       const { id } = params;
-      const { id: id1 } = todo;
-      if (id1 === id) {
+      const { id: todoId } = todo;
+      if (!id) return false;
+      if (todoId === +id) {
         setCurIndex(inx);
         return true;
       }

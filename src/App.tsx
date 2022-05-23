@@ -10,6 +10,8 @@ import { AuthContext } from './context/context';
 import { useAppSelector } from './types/hooks/hooks';
 
 const App = () => {
+  // todo
+  // @ts-ignore
   const [isAuth, setIsAuth] = useState(JSON.parse(localStorage.getItem('isAuth')));
   const loading = useAppSelector((state) => state.todos.loading);
   const providerValue = useMemo(() => ({ isAuth, setIsAuth }), [isAuth, setIsAuth]);

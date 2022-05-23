@@ -11,8 +11,7 @@ const appReducer = combineReducers({
   todos: todoSlice,
 });
 
-// @ts-ignore
-const rootReducer = (state, action: AnyAction) => {
+const rootReducer = (state:any, action: AnyAction) => {
   if (action.type === 'auth/logout/pending') {
     return appReducer(undefined, action);
   }

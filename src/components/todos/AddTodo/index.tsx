@@ -87,7 +87,7 @@ const AddTodo: FC<IProps> = ({
     >
       <Box sx={styles.TodoPanel}>
         <Input
-          placeholder="Index"
+          placeholder="Todo"
           inputProps={{
             'aria-label': 'Description',
           }}

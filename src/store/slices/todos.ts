@@ -1,11 +1,13 @@
-import {
-  createAsyncThunk,
-  createSlice,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TodoService } from '../../services/TodoService';
+import { ITodo } from '../../types/types';
 
-const initialState = {
-  todos: null,
+interface IState {
+  todos: ITodo[]
+  loading: boolean
+}
+const initialState: IState = {
+  todos: [],
   loading: false,
 };
 export const fetchTodos = createAsyncThunk('todoSlice/fetchTodos', async () => {
@@ -14,6 +16,8 @@ export const fetchTodos = createAsyncThunk('todoSlice/fetchTodos', async () => {
 });
 
 export const saveTodoOnServer = createAsyncThunk('todoSlice/saveTodoOnServer', async (_, { getState }) => {
+  // todo
+  // @ts-ignore
   const { todos } = getState().todos;
   await TodoService.postTodos(todos);
 });
