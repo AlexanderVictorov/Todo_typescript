@@ -22,8 +22,8 @@ const onRequest = (config: AxiosRequestConfig) => {
 };
 
 const logout = async () => {
-  const store = await import('../store/index');
-  store.store.dispatch(userIsAuthorized(false));
+  const importStore = await import('../store/index');
+  importStore.store.dispatch(userIsAuthorized(false));
 };
 
 const onResponse = (response: AxiosResponse) => response;
@@ -42,8 +42,7 @@ const onResponseError = async (error: AxiosError) => {
     } catch (e) {
       if (e.response.status === 401) {
         localStorage.removeItem('token');
-        localStorage.removeItem('isAuth');
-        logout();
+        await logout();
       }
     }
   }

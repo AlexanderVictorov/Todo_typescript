@@ -16,7 +16,7 @@ export const fetchTodos = createAsyncThunk('todoSlice/fetchTodos', async () => {
 });
 
 export const saveTodoOnServer = createAsyncThunk('todoSlice/saveTodoOnServer', async (_, { getState }) => {
-  // @ts-ignore
+  // @ts-ignore todo
   const { todos } = getState().todos;
   await TodoService.postTodos(todos);
 });

@@ -144,7 +144,6 @@ const Todo: FC<IProps> = ({
   const blurInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Escape') {
       setTodoText(name);
-      // e.target.blur();
     }
   };
   const changeInput = (e: React.KeyboardEvent<HTMLInputElement>) => {

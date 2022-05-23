@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import { Typography } from '@mui/material';
 
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
 import { logout, userIsAuthorized } from '../../store/slices/auth';
-import { AuthContext } from '../../context/context';
-import { useAppDispatch } from '../../types/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../types/hooks/hooks';
 
 const styles = {
   nav: {
@@ -23,22 +22,20 @@ type TIsActiveReturnValue = { fontWeight: 'bold' | 'normal' };
 type TIsActiveStyle = ({ isActive }: TIsActiveArgs) => TIsActiveReturnValue;
 
 const Navigation = () => {
-  const { isAuth, setIsAuth } = useContext(AuthContext);
+  const isLogin = useAppSelector((state) => state.auth.isLogin);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const isActiveStyle: TIsActiveStyle = ({ isActive }) => ({ fontWeight: isActive ? 'bold' : 'normal' });
   const onClickSignOut = () => {
-    setIsAuth(false);
     localStorage.removeItem('token');
-    localStorage.removeItem('isAuth');
     navigate(ROUTE_LINKS.login);
     dispatch(userIsAuthorized(false));
     dispatch(logout());
   };
 
   return (
-    isAuth
+    isLogin
       ? (
         <Typography sx={styles.nav}>
           <NavLink to="/todo" style={isActiveStyle}>Todos </NavLink>

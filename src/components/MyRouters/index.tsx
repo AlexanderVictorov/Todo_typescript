@@ -1,7 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-
-import { AuthContext } from '../../context/context';
 
 import Layout from '../Layout';
 import NoMatch from '../../pages/NoMatch';
@@ -13,11 +11,22 @@ import ErrorRegistration from '../../pages/ErrorRegistration';
 import Trashcan from '../../pages/Trashcan';
 
 import ROUTE_LINKS from './routeLink';
+import { useAppDispatch, useAppSelector } from '../../types/hooks/hooks';
+import { userIsAuthorized } from '../../store/slices/auth';
 
 const MyRoutes = () => {
-  const { isAuth } = useContext(AuthContext);
+  const isLogin = useAppSelector((state) => state.auth.isLogin);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      dispatch(userIsAuthorized(true));
+    }
+  }, []);
+
   return (
-    isAuth
+    isLogin
       ? (
         <Routes>
           <Route element={<Layout />}>

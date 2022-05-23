@@ -1,4 +1,4 @@
-import React, { useContext, FormEvent } from 'react';
+import React, { FormEvent } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import {
@@ -7,7 +7,6 @@ import {
 
 import { useSnackbar } from 'notistack';
 import { LoginInServer } from '../../store/slices/auth';
-import { AuthContext } from '../../context/context';
 
 import Animation from '../../components/Animation';
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
@@ -30,7 +29,6 @@ const styles = {
 };
 
 const Login = () => {
-  const { setIsAuth } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
   const validate = useValidateForm();
   const dispatch = useAppDispatch();
@@ -44,11 +42,11 @@ const Login = () => {
   const LoginFormHandler = async (e: FormEvent<HTMLDivElement>) => {
     e.preventDefault();
     await dispatch(LoginInServer(validate.userDetails));
-    if (localStorage.getItem('isAuth')) {
-      setIsAuth(true);
+    if (localStorage.getItem('token')) {
       navigate(ROUTE_LINKS.todo);
     } else {
       userNotification();
+      validate.setUserDetails({ username: '', email: '', password: '' });
     }
   };
 
