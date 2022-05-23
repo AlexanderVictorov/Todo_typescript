@@ -3,11 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 import {
-  Box,
-  Button,
-  Stack,
-  TextField,
-  Typography,
+  Box, Button, Stack, TextField, Typography,
 } from '@mui/material';
 
 import { useSnackbar } from 'notistack';
@@ -51,14 +47,15 @@ const Registration = () => {
     <StyledBox>
       <Box sx={{ marginTop: '30px' }}>
         <Typography variant="h5">Create a new user </Typography>
-        <Box sx={{ paddingTop: '10px', position: 'relative', zIndex: '2' }} component="form" onSubmit={addUser}>
+        <Box
+          sx={{ paddingTop: '10px', position: 'relative', zIndex: '2' }}
+          component="form"
+          onSubmit={addUser}
+        >
           <Box
             sx={{
               '& > :not(style)': { m: 1, width: '26ch', display: 'flex' },
             }}
-            // todo
-            // noValidate
-            // autoComplete="off"
           >
             {(validate.userNameDirty && validate.validateError.userNameError) && (
               <Typography

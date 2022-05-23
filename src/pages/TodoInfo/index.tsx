@@ -32,9 +32,7 @@ const styles = {
 };
 
 const TodoInfo = () => {
-  // todo
-  // @ts-ignore
-  const [todoInfo, setTodoInfo] = useState<ITodo>([]);
+  const [todoInfo, setTodoInfo] = useState<ITodo | null>(null);
   const [curIndex, setCurIndex] = useState<number>(0);
 
   const loading = useAppSelector((state) => state.todos.loading || []);
@@ -97,7 +95,7 @@ const TodoInfo = () => {
       >
         <Typography>
           Info:
-          {todoInfo.name}
+          {todoInfo?.name}
         </Typography>
         <Button
           sx={styles.ButtonBackTodo}
