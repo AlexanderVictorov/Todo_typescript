@@ -1,17 +1,10 @@
 import React, { useContext } from 'react';
-import {
-  Link,
-  NavLink,
-  useNavigate,
-} from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import { Typography } from '@mui/material';
 
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
-import {
-  logout,
-  userIsAuthorized,
-} from '../../store/slices/auth';
+import { logout, userIsAuthorized } from '../../store/slices/auth';
 import { AuthContext } from '../../context/context';
 import { useAppDispatch } from '../../types/hooks/hooks';
 
@@ -25,14 +18,16 @@ const styles = {
   },
 };
 
+type TIsActiveArgs = { isActive: boolean };
+type TIsActiveReturnValue = { fontWeight: 'bold' | 'normal' };
+type TIsActiveStyle = ({ isActive }: TIsActiveArgs) => TIsActiveReturnValue;
+
 const Navigation = () => {
   const { isAuth, setIsAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const isActiveStyle = ({ isActive }) => ({
-    fontWeight: isActive ? 'bold' : 'normal',
-  });
+  const isActiveStyle: TIsActiveStyle = ({ isActive }) => ({ fontWeight: isActive ? 'bold' : 'normal' });
   const onClickSignOut = () => {
     setIsAuth(false);
     localStorage.removeItem('token');
