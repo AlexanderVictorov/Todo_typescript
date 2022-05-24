@@ -70,7 +70,10 @@ const List: FC<IProps> = ({
   };
 
   return (
-    <Grid container>
+    <Grid
+      sx={{ padding: '15px' }}
+      container
+    >
       {todoList.map((todo, index) => (
         <Todo
           onDragStart={dragStartHandler}

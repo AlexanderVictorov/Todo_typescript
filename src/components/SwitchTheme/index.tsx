@@ -72,7 +72,7 @@ export default function CustomizedSwitches() {
     <FormGroup>
       <FormControlLabel
         control={<MaterialUISwitch sx={{ m: 1, zIndex: 1000 }} /* defaultChecked */ />}
-        label={`Theme: ${mode}`}
+        label={mode}
         onClick={toggleColorMode}
       />
     </FormGroup>
