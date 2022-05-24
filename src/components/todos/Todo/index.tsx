@@ -28,6 +28,7 @@ const styles = {
     width: '430px',
   },
   Paper: {
+    backgroundColor: 'color.white',
     lineHeight: '1rem',
     position: 'relative',
     margin: 'auto',
@@ -42,6 +43,7 @@ const styles = {
     cursor: 'grabbing',
   },
   DoneTodos: {
+    backgroundColor: 'color.white',
     textDecoration: 'line-through',
     color: '#808080',
     position: 'relative',

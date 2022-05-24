@@ -15,6 +15,7 @@ import { ITodo } from '../../types/types';
 
 const styles = {
   Paper: {
+    backgroundColor: 'color.white',
     position: 'relative',
     margin: 'auto',
     padding: '10px',

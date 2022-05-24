@@ -1,16 +1,16 @@
 import React from 'react';
 
 import { Box, Typography } from '@mui/material';
-
 import Navigation from '../../pages/Navigation';
 import Animation from '../Animation';
+import CustomizedSwitches from '../SwitchTheme';
 
 const styles = {
   Header: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    background: 'linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c)',
+    backgroundColor: 'color.background',
     position: 'fixed',
     top: '0px',
     left: '0px',
@@ -22,10 +22,14 @@ const styles = {
 };
 
 const Header = () => (
-  <Box sx={styles.Header}>
+  <Box
+    sx={styles.Header}
+  >
     <Box>
-      <Typography variant="h5">Todos App</Typography>
       <Navigation />
+    </Box>
+    <Box>
+      <CustomizedSwitches />
     </Box>
     <Animation />
   </Box>

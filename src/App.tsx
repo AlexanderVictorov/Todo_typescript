@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import './App.css';
 
+import { ThemeProvider } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 import MyRoutes from './components/MyRouters';
 import Loader from './components/Loader';
 import { useAppSelector } from './types/hooks/hooks';
+import { dark, light } from './components/theme/MuiTheme';
 
 const App = () => {
   const loading = useAppSelector((state) => state.todos.loading);
+  const theme = useAppSelector((state) => state.theme.theme);
+
+  const customTheme = useMemo(() => (theme === 'light' ? light() : dark()), [theme]);
 
   return (
-    <div className="App">
-      {loading && <Loader />}
-      <MyRoutes />
-    </div>
+    <ThemeProvider theme={customTheme}>
+      <Box
+        className="App"
+      >
+        {loading && <Loader />}
+        <MyRoutes />
+      </Box>
+    </ThemeProvider>
   );
 };
 

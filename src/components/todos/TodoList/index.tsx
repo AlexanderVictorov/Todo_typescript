@@ -16,6 +16,7 @@ import { TStatus } from '../../../types/types';
 
 const styles = {
   Paper: {
+    backgroundColor: 'color.white',
     padding: '15px',
     margin: 'auto',
     textAlign: 'center',
@@ -101,7 +102,10 @@ const TodoList = () => {
         xs={12}
         sx={{ padding: '15px' }}
       >
-        <Paper sx={styles.Paper}>
+        <Paper
+          className="Vlad"
+          sx={styles.Paper}
+        >
           <AddTodo
             filter={filter}
             setFilter={setFilter}
@@ -120,10 +124,8 @@ const TodoList = () => {
         </Box>
       </Grid>
       <Grid
-        className="Vlad"
         item
         xs={12}
-        sx={styles.Paper}
       >
         <List
           InWastebasket={InWastebasket}

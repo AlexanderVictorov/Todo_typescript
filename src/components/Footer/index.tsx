@@ -10,7 +10,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    background: 'linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c)',
+    backgroundColor: 'color.background',
     position: 'fixed',
     bottom: '0px',
     left: '0px',

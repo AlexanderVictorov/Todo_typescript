@@ -17,7 +17,7 @@ const styles = {
   Login: {
     display: 'flex',
     justifyContent: 'center',
-    background: 'linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c)',
+    backgroundColor: 'color.background',
     paddingBottom: '15px',
     position: 'absolute',
     top: '25%',

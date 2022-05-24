@@ -5,10 +5,12 @@ import {
 } from '@reduxjs/toolkit';
 import todoSlice from './slices/todos';
 import authSlice from './slices/auth';
+import customTheme from './slices/theme';
 
 const appReducer = combineReducers({
   auth: authSlice,
   todos: todoSlice,
+  theme: customTheme,
 });
 
 const rootReducer = (state:any, action: AnyAction) => {

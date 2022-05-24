@@ -38,7 +38,7 @@ const DateTimePickers: FC<IPropsIP> = ({ id }) => {
         '& .MuiInputAdornment-root .MuiButtonBase-root': {
           margin: '0',
           padding: '0',
-          color: '#1976d2',
+          color: 'color.icon',
         },
       }}
       ref={inputRef}
