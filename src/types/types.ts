@@ -5,7 +5,7 @@ export interface ITodo {
   name: string,
   status: TStatus,
   validity: number,
-  overdue: boolean
+  overdue: boolean,
 }
 
 export interface IAction {

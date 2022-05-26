@@ -5,10 +5,9 @@ import { Grid } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { changeStatus } from '../../../store/slices/todos';
 
-import { ITodo } from '../../../types/types';
-
 import Todo from '../Todo';
 import { useAppDispatch } from '../../../types/hooks/hooks';
+import { ITodo } from '../../../types/types';
 
 interface IProps {
   list: ITodo[],
@@ -20,7 +19,7 @@ const List: FC<IProps> = ({
   list, updateTodo, InWastebasket,
 }) => {
   const [todoList, setTodoList] = useState<ITodo[]>([]);
-  const [currentTodo, setCurrentTodo] = useState({});
+  const [currentTodo, setCurrentTodo] = useState<ITodo | null>(null);
 
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useAppDispatch();
@@ -56,8 +55,8 @@ const List: FC<IProps> = ({
   };
   const dropHandler = (e: React.DragEvent<HTMLDivElement>, todo: ITodo) => {
     e.preventDefault();
-    setTodoList((prev: any[]) => prev.map((item) => {
-      // @ts-ignore
+    if (!currentTodo) return;
+    setTodoList((prev) => prev.map((item) => {
       if (item.id === currentTodo.id) {
         return todo;
       }
