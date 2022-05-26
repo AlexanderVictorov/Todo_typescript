@@ -7,6 +7,7 @@ import MyRoutes from './components/MyRouters';
 import Loader from './components/Loader';
 import { useAppSelector } from './types/hooks/hooks';
 import { dark, light } from './components/theme/MuiTheme';
+import DynamicBackground from './components/DynamicBackground';
 
 const App = () => {
   const loading = useAppSelector((state) => state.todos.loading);
@@ -19,6 +20,7 @@ const App = () => {
       <Box
         className="App"
       >
+        <DynamicBackground />
         {loading && <Loader />}
         <MyRoutes />
       </Box>
