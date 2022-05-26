@@ -30,6 +30,13 @@ const styles = {
     right: '10px',
     cursor: 'pointer',
   },
+  GridLight: {
+    padding: '15px',
+    zIndex: '1',
+  },
+  GridDark: {
+    padding: '15px',
+  },
 };
 
 const TodoList = () => {
@@ -40,6 +47,7 @@ const TodoList = () => {
   const [todoPerPage] = useState(4);
 
   const todoArray = useAppSelector<any[]>((state) => state.todos.todos || []);
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -100,10 +108,11 @@ const TodoList = () => {
       <Grid
         item
         xs={12}
-        sx={{ padding: '15px' }}
+        sx={theme === 'light'
+          ? styles.GridLight
+          : styles.GridDark}
       >
         <Paper
-          className="Vlad"
           sx={styles.Paper}
         >
           <AddTodo

@@ -4,8 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   Box, Button, Paper, Typography,
 } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import Loader from '../../components/Loader';
 import { fetchTodos } from '../../store/slices/todos';
@@ -25,10 +23,9 @@ const styles = {
     width: '100%',
     maxWidth: '500px',
     textDecoration: 'none',
-    zIndex: 1,
   },
   ButtonBackTodo: {
-    marginLeft: 'auto', fontFamily: 'serif', fontSize: '12px', textTransform: 'capitalize',
+    marginLeft: 'auto', fontFamily: 'serif', fontSize: '14px', textTransform: 'capitalize',
   },
 };
 
@@ -108,15 +105,18 @@ const TodoInfo = () => {
         </Button>
       </Paper>
       <Box sx={{ padding: '10px' }}>
-        <Typography>Flip Through Todos</Typography>
-        <ArrowBackIcon
-          sx={{ cursor: 'pointer' }}
+        <Button
+          sx={styles.ButtonBackTodo}
           onClick={onPreviousTodo}
-        />
-        <ArrowForwardIcon
-          sx={{ cursor: 'pointer' }}
+        >
+          previous Todos
+        </Button>
+        <Button
+          sx={styles.ButtonBackTodo}
           onClick={onNextTodo}
-        />
+        >
+          next Todos
+        </Button>
       </Box>
     </Box>
   );

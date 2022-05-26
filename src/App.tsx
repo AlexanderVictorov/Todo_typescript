@@ -20,8 +20,8 @@ const App = () => {
       <Box
         className="App"
       >
-        <DynamicBackground />
         {loading && <Loader />}
+        <DynamicBackground />
         <MyRoutes />
       </Box>
     </ThemeProvider>

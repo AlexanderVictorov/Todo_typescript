@@ -12,6 +12,9 @@ const lightThemeOptions = {
       icon: '#1769aa',
       background: '#80cbc4',
     },
+    zIndex: {
+      zIndex: '1',
+    },
   },
 };
 const darkThemeOptions = {
@@ -25,6 +28,9 @@ const darkThemeOptions = {
       white: '#006064',
       icon: '#bdbdbd',
       background: '#00838f',
+    },
+    zIndex: {
+      zIndex: '0',
     },
   },
 };
