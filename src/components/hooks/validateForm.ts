@@ -9,9 +9,9 @@ const useValidateForm = () => {
   const [passwordDirty, setPasswordDirty] = useState(false);
   const [validateError, setValidateError] = useState(
     {
-      userNameError: 'Enter values for the username field',
-      emailError: 'Enter values for the email field',
-      passwordError: 'Enter values for the password field',
+      userNameError: 'Username cannot be empty',
+      emailError: 'Email cannot be empty',
+      passwordError: 'Password cannot be empty',
     },
   );
   const [formValid, setFormValid] = useState(false);
@@ -45,7 +45,7 @@ const useValidateForm = () => {
       [e.target.name]: e.target.value,
     });
     if (!e.target.value) {
-      setValidateError({ ...validateError, userNameError: 'Enter values for the username field' });
+      setValidateError({ ...validateError, userNameError: 'Username cannot be empty' });
     } else {
       setValidateError({ ...validateError, userNameError: '' });
     }
@@ -69,7 +69,7 @@ const useValidateForm = () => {
       [e.target.name]: e.target.value,
     });
     if (!e.target.value) {
-      setValidateError({ ...validateError, passwordError: 'Enter values for the password field' });
+      setValidateError({ ...validateError, passwordError: 'Password cannot be empty' });
     }
     if (e.target.value.length < 3) {
       setValidateError({ ...validateError, passwordError: 'Password must be longer than 3 characters' });

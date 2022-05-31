@@ -1,7 +1,5 @@
 import React, { FormEvent } from 'react';
 import { NavLink } from 'react-router-dom';
-
-import { styled } from '@mui/material/styles';
 import {
   Box, Button, Stack, TextField, Typography,
 } from '@mui/material';
@@ -13,20 +11,21 @@ import { RegistrationInServer } from '../../store/slices/auth';
 import useValidateForm from '../../components/hooks/validateForm';
 import { useAppDispatch } from '../../types/hooks/hooks';
 
-const StyledBox = styled(Box)`
-  display: flex;
-  justify-content: center;
-  background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: auto;
-  margin-top: -200px;
-  overflow: hidden;
-  padding-bottom: 15px;
-`;
-
+const styles = {
+  Registration: {
+    display: 'flex',
+    justifyContent: 'center',
+    position: 'absolute',
+    backgroundColor: 'color.background',
+    top: '50%',
+    left: '0',
+    width: '100%',
+    height: 'auto',
+    marginTop: '-200px',
+    overflow: 'hidden',
+    paddingBottom: '15px',
+  },
+};
 const Registration = () => {
   const validate = useValidateForm();
   const dispatch = useAppDispatch();
@@ -44,7 +43,7 @@ const Registration = () => {
   };
 
   return (
-    <StyledBox>
+    <Box sx={styles.Registration}>
       <Box sx={{ marginTop: '30px' }}>
         <Typography variant="h5">Create a new user </Typography>
         <Box
@@ -59,7 +58,6 @@ const Registration = () => {
           >
             {(validate.userNameDirty && validate.validateError.userNameError) && (
               <Typography
-                sx={{ fontSize: '12px' }}
                 color="error"
               >
                 {validate.validateError.userNameError}
@@ -76,7 +74,6 @@ const Registration = () => {
             />
             {(validate.emailDirty && validate.validateError.emailError) && (
               <Typography
-                sx={{ fontSize: '12px' }}
                 color="error"
               >
                 {validate.validateError.emailError}
@@ -93,7 +90,6 @@ const Registration = () => {
             />
             {(validate.passwordDirty && validate.validateError.passwordError) && (
               <Typography
-                sx={{ fontSize: '12px' }}
                 color="error"
               >
                 {validate.validateError.passwordError}
@@ -127,7 +123,7 @@ const Registration = () => {
         </Box>
       </Box>
       <Animation />
-    </StyledBox>
+    </Box>
 
   );
 };

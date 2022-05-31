@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TodoService } from '../../services/TodoService';
 import { ITodo } from '../../types/types';
+import { RootState } from '../index';
 
 interface IState {
-  todos: ITodo[]
-  loading: boolean
+  todos: ITodo[];
+  loading: boolean;
 }
+
 const initialState: IState = {
   todos: [],
   loading: false,
@@ -15,9 +17,9 @@ export const fetchTodos = createAsyncThunk('todoSlice/fetchTodos', async () => {
   return response.data;
 });
 
-export const saveTodoOnServer = createAsyncThunk('todoSlice/saveTodoOnServer', async (_, { getState }) => {
-  // @ts-ignore todo
-  const { todos } = getState().todos;
+export const saveTodoOnServer = createAsyncThunk('todoSlice/saveTodoOnServer', async (_, state) => {
+  const appState = state.getState() as RootState;
+  const { todos } = appState.todos;
   await TodoService.postTodos(todos);
 });
 
@@ -32,48 +34,69 @@ const todoSlice = createSlice({
       state.todos = state.todos.filter((item) => item.id !== action.payload);
     },
     changeStatus(state, action) {
-      state.todos.map((item) => {
+      state.todos = state.todos.map((item) => {
         if (item.id !== action.payload.id) return item;
         if (action.payload.statusTodoDone) {
-          item.status = action.payload.statusTodoDone;
+          return {
+            ...item,
+            status: action.payload.statusTodoDone,
+          };
         }
         if (action.payload.statusTodoActive) {
-          item.status = action.payload.statusTodoActive;
+          return {
+            ...item,
+            status: action.payload.statusTodoActive,
+          };
         }
         if (action.payload.statusTodoTrash) {
-          item.status = action.payload.statusTodoTrash;
+          return {
+            ...item,
+            status: action.payload.statusTodoTrash,
+          };
         }
         return item;
       });
     },
     changeTodos(state, action) {
-      state.todos.map((item) => {
+      state.todos = state.todos.map((item) => {
         if (item.id === action.payload.id) {
-          item.name = action.payload.newText;
+          return {
+            ...item,
+            name: action.payload.newText,
+          };
         }
         return item;
       });
     },
     leadTimeTodo(state, action) {
-      state.todos.map((item) => {
+      state.todos = state.todos.map((item) => {
         if (item.id === action.payload.id) {
-          item.validity = action.payload.newTime;
+          return {
+            ...item,
+            validity: action.payload.newTime,
+          };
         }
         return item;
       });
     },
     overdueTask(state, action) {
-      state.todos.map((item) => {
+      state.todos = state.todos.map((item) => {
         if (item.id === action.payload.id) {
-          item.overdue = action.payload.activeTime;
+          return {
+            ...item,
+            overdue: action.payload.activeTime,
+          };
         }
         return item;
       });
     },
     validForExecution(state, action) {
-      state.todos.map((item) => {
+      state.todos = state.todos.map((item) => {
         if (item.id === action.payload.id) {
-          item.overdue = action.payload.timeOver;
+          return {
+            ...item,
+            overdue: action.payload.timeOver,
+          };
         }
         return item;
       });

@@ -44,10 +44,10 @@ const Login = () => {
     await dispatch(LoginInServer(validate.userDetails));
     if (localStorage.getItem('token')) {
       navigate(ROUTE_LINKS.todo);
-    } else {
-      userNotification();
-      validate.setUserDetails({ username: '', email: '', password: '' });
+      return;
     }
+    userNotification();
+    validate.setUserDetails({ username: '', email: '', password: '' });
   };
 
   return (
@@ -65,7 +65,7 @@ const Login = () => {
             }}
           >
             {(validate.userNameDirty && validate.validateError.userNameError) && (
-              <Typography sx={{ fontSize: '12px' }} color="error">
+              <Typography color="error">
                 {validate.validateError.userNameError}
               </Typography>
             )}
@@ -79,7 +79,7 @@ const Login = () => {
               onBlur={validate.blurHandler}
             />
             {(validate.emailDirty && validate.validateError.emailError)
-              && <Typography sx={{ fontSize: '12px' }} color="error">{validate.validateError.emailError}</Typography>}
+              && <Typography color="error">{validate.validateError.emailError}</Typography>}
             <TextField
               label="Email"
               variant="outlined"
@@ -91,7 +91,7 @@ const Login = () => {
             />
             {(validate.passwordDirty && validate.validateError.passwordError)
               && (
-                <Typography sx={{ fontSize: '12px' }} color="error">
+                <Typography color="error">
                   {validate.validateError.passwordError}
                 </Typography>
               )}

@@ -85,7 +85,7 @@ const TodoList = () => {
       id: Date.now(),
       name,
       status: 'active',
-      validity: Infinity,
+      validity: null,
       overdue: false,
     }));
   };

@@ -65,19 +65,19 @@ const TodoInfo = () => {
     if (todoArray[curIndex + 1]) {
       const { id } = todoArray[curIndex + 1];
       navigate(`${ROUTE_LINKS.todo}/${id}`);
-    } else {
-      const { id } = todoArray[0];
-      navigate(`${ROUTE_LINKS.todo}/${id}`);
+      return;
     }
+    const { id } = todoArray[0];
+    navigate(`${ROUTE_LINKS.todo}/${id}`);
   };
   const onPreviousTodo = () => {
     if (todoArray[curIndex - 1]) {
       const { id } = todoArray[curIndex - 1];
       navigate(`${ROUTE_LINKS.todo}/${id}`);
-    } else {
-      const { id } = todoArray[todoArray.length - 1];
-      navigate(`${ROUTE_LINKS.todo}/${id}`);
+      return;
     }
+    const { id } = todoArray[todoArray.length - 1];
+    navigate(`${ROUTE_LINKS.todo}/${id}`);
   };
   const backTodos = () => {
     navigate(ROUTE_LINKS.todo);

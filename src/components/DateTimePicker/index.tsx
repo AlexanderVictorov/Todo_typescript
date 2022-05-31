@@ -12,16 +12,14 @@ interface IPropsIP {
 }
 
 const DateTimePickers: FC<IPropsIP> = ({ id }) => {
-  const [value, setValue] = useState<Date | null>(new Date('2022-04-27T00:00:00'));
+  const [value, setValue] = useState<Date | null>(new Date(Date.now()));
   const [closeDatePicker, setCloseDatePicker] = useState(true);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!closeDatePicker) {
-      if (!value) return;
-      const newTime: number = Date.parse(value.toString());
-      dispatch(leadTimeTodo({ id, newTime }));
-    }
+    if (closeDatePicker || !value) return;
+    const newTime = Date.parse(value.toString());
+    dispatch(leadTimeTodo({ id, newTime }));
   }, [value]);
 
   const addTimeTodo = () => {

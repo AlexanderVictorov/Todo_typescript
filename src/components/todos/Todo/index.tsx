@@ -103,14 +103,12 @@ const Todo: FC<IProps> = ({
 
   useEffect(() => {
     const dateNow = Date.now();
-    if (validity <= dateNow) {
-      const activeTime = true;
-      dispatch(overdueTask({ id, activeTime }));
-      handleClickTimeOff();
-    } else {
-      const timeOver = false;
-      dispatch(validForExecution({ id, timeOver }));
+    if (!validity || validity > dateNow) {
+      dispatch(validForExecution({ id, timeOver: false }));
+      return;
     }
+    dispatch(overdueTask({ id, activeTime: true }));
+    handleClickTimeOff();
   }, [validity]);
 
   const onChangeTodoText = (event: React.ChangeEvent<HTMLInputElement>) => setTodoText(event.target.value);

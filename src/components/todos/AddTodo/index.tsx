@@ -62,10 +62,7 @@ const AddTodo: FC<IProps> = ({
 
   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (newTodo === '') {
-      setIsError(true);
-      return;
-    }
+    if (!newTodo) return setIsError(true);
     setIsError(false);
     addTodoInList(newTodo);
     setNewTodo('');
