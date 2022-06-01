@@ -30,7 +30,7 @@ const DateTimePickers: FC<IPropsIP> = ({ id }) => {
   };
 
   const renderInput = ({ InputProps, inputRef, inputProps }: TextFieldProps) => (
-    // @ts-ignore todo
+    // @ts-ignore
     <Box
       sx={{
         '& .MuiInputAdornment-root .MuiButtonBase-root': {

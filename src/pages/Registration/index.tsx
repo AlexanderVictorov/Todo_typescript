@@ -10,6 +10,7 @@ import ROUTE_LINKS from '../../components/MyRouters/routeLink';
 import { RegistrationInServer } from '../../store/slices/auth';
 import useValidateForm from '../../components/hooks/validateForm';
 import { useAppDispatch } from '../../types/hooks/hooks';
+import { MyTypographyError } from '../../components/MyTypographyError';
 
 const styles = {
   Registration: {
@@ -57,11 +58,7 @@ const Registration = () => {
             }}
           >
             {(validate.userNameDirty && validate.validateError.userNameError) && (
-              <Typography
-                color="error"
-              >
-                {validate.validateError.userNameError}
-              </Typography>
+              <MyTypographyError errorMassage={validate.validateError.userNameError} />
             )}
             <TextField
               label="Username"
@@ -73,11 +70,7 @@ const Registration = () => {
               onBlur={validate.blurHandler}
             />
             {(validate.emailDirty && validate.validateError.emailError) && (
-              <Typography
-                color="error"
-              >
-                {validate.validateError.emailError}
-              </Typography>
+              <MyTypographyError errorMassage={validate.validateError.emailError} />
             )}
             <TextField
               label="Email"
@@ -89,11 +82,7 @@ const Registration = () => {
               onBlur={validate.blurHandler}
             />
             {(validate.passwordDirty && validate.validateError.passwordError) && (
-              <Typography
-                color="error"
-              >
-                {validate.validateError.passwordError}
-              </Typography>
+              <MyTypographyError errorMassage={validate.validateError.passwordError} />
             )}
             <TextField
               label="Password"

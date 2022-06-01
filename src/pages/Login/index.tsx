@@ -12,6 +12,7 @@ import Animation from '../../components/Animation';
 import ROUTE_LINKS from '../../components/MyRouters/routeLink';
 import useValidateForm from '../../components/hooks/validateForm';
 import { useAppDispatch } from '../../types/hooks/hooks';
+import { MyTypographyError } from '../../components/MyTypographyError';
 
 const styles = {
   Login: {
@@ -65,9 +66,7 @@ const Login = () => {
             }}
           >
             {(validate.userNameDirty && validate.validateError.userNameError) && (
-              <Typography color="error">
-                {validate.validateError.userNameError}
-              </Typography>
+              <MyTypographyError errorMassage={validate.validateError.userNameError} />
             )}
             <TextField
               label="Username"
@@ -79,7 +78,7 @@ const Login = () => {
               onBlur={validate.blurHandler}
             />
             {(validate.emailDirty && validate.validateError.emailError)
-              && <Typography color="error">{validate.validateError.emailError}</Typography>}
+              && <MyTypographyError errorMassage={validate.validateError.emailError} />}
             <TextField
               label="Email"
               variant="outlined"
@@ -91,9 +90,7 @@ const Login = () => {
             />
             {(validate.passwordDirty && validate.validateError.passwordError)
               && (
-                <Typography color="error">
-                  {validate.validateError.passwordError}
-                </Typography>
+                <MyTypographyError errorMassage={validate.validateError.passwordError} />
               )}
             <TextField
               label="Password"
